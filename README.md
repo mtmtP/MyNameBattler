@@ -1,0 +1,2 @@
+# MyNameBattler
+動くWEBページコンテスト2020提出用ゲーム
