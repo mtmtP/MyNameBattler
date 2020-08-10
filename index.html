@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://grawo0916.github.io/MyNameBattler/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="マイネームバトラー" />
+    <meta property="og:description" content="自分の名前で遊ぶバトルゲーム！最強キャラは誰だ！？" />
+    <meta property="og:site_name" content="ぐらお" />
+    <meta property="og:image" content="https://grawo0916.github.io/MyNameBattler/img/ogp.png" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <title>My Name Battler</title>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+                <div id="header-logo">My Name Battle<span class="buruburu">r</span></div>
+                <button id="btn">？</button>         
+        </header>
+        <div id="modal" class="modal">     
+            <div class="modal-content">
+                <button id="closeBtn">×</button>
+                <div class="modal-body">
+                        
+                    <div class="modal-content-inner-box">
+                        <h1>説明書</h1>
+                        <ul>
+
+                            <li>
+                                <p class="manual-title">入力について</p>
+                                <p class="manual-content sub">
+                                    名前や好物の入力は、スペースの有無や半角全角、大文字小文字の違いもステータス診断に影響します。
+                                </p>
+                            </li>
+                            <li>
+                                <p class="manual-title">好物について</p>
+                                <p class="manual-content sub">
+                                    好物はアイテムとして、一定の確率で勝手に使うことがあります。<br>
+                                    アイテムはタイプがいくつかあって、アイテムタイプごとに特定の効果を発揮します。
+                                </p>
+                            </li>
+                            <li>
+                                <p class="manual-title">属性について</p>
+                                <p class="manual-content sub">
+                                    プレイヤーは勇者、戦士、僧侶の３つの属性があり、三つ巴の関係です。<br>
+                                    勇者は戦士に強く、戦士は僧侶に強く、僧侶は勇者に強い設定です。<br>
+                                    同じ属性同士を1としたときに、強い相手には1.2倍、弱い相手には0.8倍のダメージを与えます。
+                                </p>
+                            </li>
+                            <li>
+                                <p class="manual-title">運について</p>
+                                <p class="manual-content sub">
+                                    プレイヤーには運のステータスがあります。<br>
+                                    〇△×の順に運が良く、”会心の一撃”が出る確率が上がります。<br>
+                                    会心の一撃はダメージが1.5倍になります。
+                                </p>
+                            </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section1" class="section">
+            <div class="content center">
+                <h1>My Name Battler</h1>
+                <p id = "sub-title" class="sub">マイネームバトラー</p>
+                <p class="sub">自分の名前と好物を入力してね。</p>
+                <input type="text" id="p1-name-in" placeholder="名前" class="block">
+                <input type="text" id="p1-fav-in" placeholder="好物" class="block">
+                <button type="submit" onclick="p1submit()">次へ</button>
+                <div id ="explanation" class="sub">
+                    自分の名前で遊ぶバトルゲーム！<br>
+                    好物はアイテムとして自動的に使用されるよ。
+                    相性や会心の一撃、アイテムのタイミング次第では思わぬ大逆転も！<br>
+                    最強キャラは誰だ！？
+                </div>
+            </div>
+        </div>
+        <div id="section2" class="section">
+            <div class="content">
+                <p class="sub center">対戦相手の名前と好物を入力してね。</p>
+                <input type="text" id="p2-name-in" placeholder="名前" class="block">
+                <div id="p2fav-in-div" class="relative center">
+                    <input type="text" id="p2-fav-in" placeholder="好物" class="block">
+                    <button class="absolute" onclick="autoFav()">Auto</button>
+                </div>
+                <button type="submit" onclick="p2submit()" class = "block center">次へ</button>
+                <div id="com-area">
+                    <p class="sub center">-もしくは-</p>
+                    <p class="sub center">COMプレイヤーから選ぶ</p>
+                    <button class="block center" onclick="comChoose(1)">福沢諭吉</button>
+                    <button class="block center" onclick="comChoose(2)">空海</button>
+                    <button class="block center" onclick="comChoose(3)">毛利元就</button>
+                </div>
+            </div>
+        </div>
+        <div id="section3" class="section">
+            <div class="content">
+                <div id="p1-status" class="clearfix player-content"> 
+                    <div class="player-header">
+                        <span id="p1-name-out" class="player-name"></span>
+                        <span id="p1-fav-out" class="item"></span> 
+                    </div>
+                    <div id = "p1-img-box" class="img-box float"></div>
+                    
+                    <div id = "p1-status-box" class="status-box float">
+                        <div class="inner-box relative">              
+                            <div class="absolute bar">
+                                <div id = "p1-HP-bar" class="color absolute"></div>                               
+                            </div>
+                            <p id="p1-HP" class="absolute status-text"></p>
+                            <span class="absolute">HP:</span>
+                        </div>
+                        <div class="inner-box relative">
+                            <div class="absolute bar">
+                                <p id = "p1-PW-bar" class="color"></p>
+                            </div>
+                            <p id="p1-PW" class="absolute status-text"></p>
+                            <span class="absolute">PW:</span>
+                        </div>
+                        <div class="inner-box relative">
+                            <div class="absolute bar">
+                                <p id = "p1-DF-bar" class="color"></p>
+                            </div>
+                            <p id="p1-DF" class="absolute status-text"></p>
+                            <span class="absolute">DF:</span>
+                        </div>
+                        <div class="inner-box">
+                            <span id="p1-luck"></span>
+                            <span id="p1-type"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <ul id="console-area"></ul>
+                </div>
+
+
+                <div id="p2-status" class="clearfix player-content"> 
+                    <div class="player-header">
+                        <span id="p2-name-out" class="player-name"></span>
+                        <span id="p2-fav-out" class="item"></span> 
+                    </div>
+                    <div id = "p2-img-box" class="img-box float"></div>
+                    
+                    <div id = "p2-status-box" class="status-box float">
+                        <div class="inner-box relative">              
+                            <div class="absolute bar">
+                                <div id = "p2-HP-bar" class="color absolute"></div>                               
+                            </div>
+                            <p id="p2-HP" class="absolute status-text"></p>
+                            <span class="absolute">HP:</span>
+                        </div>
+                        <div class="inner-box relative">
+                            <div class="absolute bar">
+                                <p id = "p2-PW-bar" class="color"></p>
+                            </div>
+                            <p id="p2-PW" class="absolute status-text"></p>
+                            <span class="absolute">PW:</span>
+                        </div>
+                        <div class="inner-box relative">
+                            <div class="absolute bar">
+                                <p id = "p2-DF-bar" class="color"></p>
+                            </div>
+                            <p id="p2-DF" class="absolute status-text"></p>
+                            <span class="absolute">DF:</span>
+                        </div>
+                        <div class="inner-box">
+                            <span id="p2-luck"></span>
+                            <span id="p2-type"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section4" class="section">
+            <div class="content">
+                <h1 class="center">結果発表</h1>
+                <p id="winner"></p>
+                <p id="summary"></p>
+                <p id="tweet-area" class="center"></p>
+                <button id="replay" class="block center" onclick="retry()">もう一度遊ぶ</button>
+            </div>
+        </div>
+
+        <footer>
+                <span class="sub">N予備校 <a href="https://progedu.github.io/webappcontest2020s/entry">動くWEBページコンテスト2020</a></span> 
+        </footer>
+    </div>
+</body>
+<script src="myNameBattler.js"></script>
+</html>
