@@ -390,7 +390,7 @@ function line(summary){
  * 診断系
  */
 
-//戦闘力診断
+//戦闘力診断（参考:http://barcodebattler.net/page12.htm)
 function statusAssessment(obj) {
     //コードを全部足す
     let sumOfCharCode = 0;
