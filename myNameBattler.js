@@ -34,6 +34,7 @@ const tweetArea = document.getElementById('tweet-area');
 const p1Box = document.getElementById('p1-status');
 const p2Box = document.getElementById('p2-status');
 
+//変数
 const HPmax = 99000, PWmax = DFmax = 9900;　//ステータスの最大値
 const HPmin = 0, PWmin = DFmin = 100;　//ステータスの最小値
 let attacker, receiver; //攻撃側と受け身側。
@@ -42,11 +43,10 @@ let flg; //どちらの攻撃ターンかの目安。毎ターン1ずつ加算�
 let count = 0; //攻撃回数（結果発表用）
 let isEnter = false; //エンターキーで操作できる状態かどうか
 
-
 //player2用、アイテムリスト
-const randItemArr = ['お酒', 'りんご', 'カレー', '卵', 'エナジードリンク', '猫', '札束','牛丼','きゅうり','大根'];
+const randItemArr = ['お酒', 'りんご', 'カレー', '卵', 'エナジードリンク', '猫', '札束','牛丼','きゅうり','ちくわ','どら焼き'];
 
-//運(criticalは会心の一撃が出る確率)
+//運(luck.criticalは会心の一撃が出る確率)
 const luck = { 
     luck1: { mark: '〇', critical: 0.2 },
     luck2: { mark: '△', critical: 0.15 },
@@ -165,7 +165,7 @@ function p2submit() {
 function comChoose(i) {
     if(player1.name === undefined){
         alert('まずは自分の名前を入力してください。'); 
-        return
+        return;
     }
     switch (i) {
         case 1: player2 = com.com1; break;
@@ -209,8 +209,7 @@ function readyBattle(){
 
 /**
  * カードで先攻を決める
- * @param {number} num 
- * DOM生成したカードに記載の番号。左右どちらのカードを選んだか。
+ * @param {number} num DOM生成したカードに記載の番号。左右どちらのカードを選んだか。
  */
 function shake(num) {
     //ランダムでどちらのカードが先攻のカードになるかを決める。　
@@ -453,7 +452,10 @@ function typeAssess(num){
     }
 }
 
-//基礎ダメージ診断
+/**
+ * 基礎ダメージ診断
+ *  @return {number}　基礎ダメージ数値
+ */
 function baseDamage(attacker, receiver) {
     let damage = (attacker.PW * 3) + (attacker.PW * Math.random());
     damage = Math.floor(damage - receiver.DF) / 2;
@@ -478,17 +480,12 @@ function match(attacker, receiver) {
 
 //攻撃を受けたときにステータスが赤くなるcss表現
 function cssChange(){
-    if(flg === 0){
-        p2Box.className = 'clearfix  player-content red';
-        setTimeout(() => {
-            p2Box.className = 'clearfix  player-content';
-        }, 500);
-    }else{
-        p1Box.className = 'clearfix  player-content red';
-        setTimeout(() => {
-            p1Box.className = 'clearfix  player-content';
-        }, 500);
-    }
+    let box;
+    flg === 0? box = p2Box : box = p1Box;
+    box.classList.add('red');
+    setTimeout(() => {
+        box.classList.remove('red');
+    }, 500);
 }
 
 
