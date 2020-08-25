@@ -18,7 +18,8 @@ button{
     border:none;
     height: 30px;
     padding: 0px 1em;
-    outline: none; 
+    outline: none;
+    cursor:pointer; 
 }
 input{
     height:30px;
@@ -105,8 +106,6 @@ header{
     color:orange;
     float:left;
 }
-
-/*https://www.soichiro.org/から拝借*/
 .buruburu {
     display: inline-block;
     animation: hurueru 6s infinite;
@@ -132,8 +131,6 @@ header{
     transform: translate(0px, 0px) rotateZ(360deg)
 }
 }
-
-
 #btn{
   border-radius:20px;
   width:20px;
