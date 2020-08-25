@@ -132,7 +132,7 @@ const item = {
 function p1submit() {
     //空欄禁止
     if (p1NameIn.value.length === 0) {  
-        alert('名前を入力してください。'); 
+        alert('名前を入力してください。（自分）'); 
         return;
     }　
     //スペース禁止
@@ -154,8 +154,20 @@ function autoFav() {
 
 //player2入力情報の受け取り
 function p2submit() {
+    //p1の入力漏れをチェック
+    //空欄禁止
+    if (p1NameIn.value.length === 0) {  
+        alert('名前を入力してください。（自分）'); 
+        return;
+    }　
+    //スペース禁止
+    if(p1NameIn.value.slice( 0, 1 ) === ' ' || p1NameIn.value.slice( 0, 1 ) === '　'){
+        alert('一文字目がスペースはダメです。(自分の名前)'); 
+        return;
+    }
+    //p2の入力漏れをチェック
     if (p2NameIn.value.length === 0) {  //空欄禁止
-        alert('名前を入力してください。'); 
+        alert('名前を入力してください。（対戦相手）'); 
         return; 
     }
     if(p2NameIn.value.slice( 0, 1 ) === ' ' || p2NameIn.value.slice( 0, 1 ) === '　'){
