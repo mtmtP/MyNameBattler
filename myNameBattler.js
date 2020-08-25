@@ -35,8 +35,8 @@ const p1Box = document.getElementById('p1-status');
 const p2Box = document.getElementById('p2-status');
 
 //変数
-const HPmax = 99000, PWmax = DFmax = 9900;　//ステータスの最大値
-const HPmin = 0, PWmin = DFmin = 100;　//ステータスの最小値
+const HPmax = 99000, PWmax = 9900 , DFmax = 9900;　//ステータスの最大値
+const HPmin = 0, PWmin = 100 , DFmin = 100;　//ステータスの最小値
 let attacker, receiver; //攻撃側と受け身側。
 let player1 ={};//player1,player2のステータスを格納するオブジェクト
 let player2 ={};
@@ -393,7 +393,7 @@ function tweet(summary) {
     const hrefValue =
     `https://twitter.com/intent/tweet?button_hashtag=${encodeURIComponent('マイネームバトラー') }&ref_src=twsrc%5Etfw`;
     anchor.setAttribute('href', hrefValue);
-    anchor.setAttribute('data-text', `${summary} https://grawo0916.github.io/MyNameBattler/`);
+    anchor.setAttribute('data-text', `${summary} https://mtmtp.github.io/MyNameBattler/`);
     anchor.setAttribute('data-size',"small");
     tweetArea.appendChild(anchor);
     const script = dom('script','','nomal');
@@ -402,7 +402,7 @@ function tweet(summary) {
 }
 //ラインボタン作成
 function line(summary){
-    const text = `${summary}マイネームバトラー（https://grawo0916.github.io/MyNameBattler/）`;
+    const text = `${summary}マイネームバトラー（https://mtmtp.github.io/MyNameBattler/）`;
     const anchor = dom('a','<img src="img/wide-default.png" />','line-button');
     const hrefValue = `http://line.me/R/msg/text/?${encodeURIComponent(text)}`;
     anchor.setAttribute('href' , hrefValue);
@@ -429,9 +429,12 @@ function statusAssessment(obj) {
          strArr.push(str.slice(i,i+1)); //1桁ずつ取り出す
     }
     //ステータスを決定
-    obj.HP = obj.HP1 = parseInt(`${strArr[1]}${strArr[3]}000`);
-    obj.PW = obj.PW1 = parseInt(`${strArr[2]}${strArr[5]}00`);
-    obj.DF = obj.DF1 = parseInt(`${strArr[0]}${strArr[4]}00`);
+    obj.HP = parseInt(`${strArr[1]}${strArr[3]}000`);
+    obj.PW = Math.max(parseInt(`${strArr[2]}${strArr[5]}00`),PWmin);//最低値か診断値か高いほう
+    obj.DF = Math.max(parseInt(`${strArr[0]}${strArr[4]}00`),DFmin);//最低値か診断値か高いほう
+    obj.HP1 = obj.HP//対戦結果発表用に初期値を保存
+    obj.PW1 = obj.PW//対戦結果発表用に初期値を保存
+    obj.DF1 = obj.DF//対戦結果発表用に初期値を保存
     obj.Luck = luckAssess(sumOfCharCode % 3);
     obj.Type = typeAssess(strArr[3] % 3);
     obj.itemCount = 0;
