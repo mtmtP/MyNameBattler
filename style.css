@@ -372,6 +372,7 @@ border-left: 15px solid transparent;
     height:40px;
     margin:5px;
     float:left;
+    cursor:pointer;
 }
 .face{
     width:30px;
