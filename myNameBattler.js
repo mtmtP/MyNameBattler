@@ -38,7 +38,8 @@ const p2Box = document.getElementById('p2-status');
 const HPmax = 99000, PWmax = DFmax = 9900;　//ステータスの最大値
 const HPmin = 0, PWmin = DFmin = 100;　//ステータスの最小値
 let attacker, receiver; //攻撃側と受け身側。
-let player1 = player2 = {}; //player1,player2のステータスを格納する
+let player1 ={};//player1,player2のステータスを格納するオブジェクト
+let player2 ={};
 let flg; //どちらの攻撃ターンかの目安。毎ターン1ずつ加算。
 let count = 0; //攻撃回数（結果発表用）
 let isEnter = false; //エンターキーで操作できる状態かどうか
@@ -129,8 +130,14 @@ const item = {
 
 //player1入力情報の受け取り
 function p1submit() {
-    if (p1NameIn.value.length === 0) {  //空欄禁止
+    //空欄禁止
+    if (p1NameIn.value.length === 0) {  
         alert('名前を入力してください。'); 
+        return;
+    }　
+    //スペース禁止
+    if(p1NameIn.value.slice( 0, 1 ) === ' ' || p1NameIn.value.slice( 0, 1 ) === '　'){
+        alert('一文字目がスペースはダメです。(自分の名前)'); 
         return;
     }
     player1.name = p1NameIn.value;
@@ -150,6 +157,10 @@ function p2submit() {
     if (p2NameIn.value.length === 0) {  //空欄禁止
         alert('名前を入力してください。'); 
         return; 
+    }
+    if(p2NameIn.value.slice( 0, 1 ) === ' ' || p2NameIn.value.slice( 0, 1 ) === '　'){
+        alert('一文字目がスペースはダメです。(対戦相手の名前)'); 
+        return;
     }
     player2.name = p2NameIn.value;
     player2.item = p2FavIn.value;
