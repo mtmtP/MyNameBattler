@@ -158,11 +158,13 @@ function p2submit() {
     //空欄禁止
     if (p1NameIn.value.length === 0) {  
         alert('名前を入力してください。（自分）'); 
+        nextSection(1);
         return;
     }　
     //スペース禁止
     if(p1NameIn.value.slice( 0, 1 ) === ' ' || p1NameIn.value.slice( 0, 1 ) === '　'){
         alert('一文字目がスペースはダメです。(自分の名前)'); 
+        nextSection(1);
         return;
     }
     //p2の入力漏れをチェック
@@ -188,6 +190,7 @@ function p2submit() {
 function comChoose(i) {
     if(player1.name === undefined){
         alert('まずは自分の名前を入力してください。'); 
+        nextSection(1);
         return;
     }
     switch (i) {

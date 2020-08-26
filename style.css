@@ -101,11 +101,14 @@ header{
     z-index:50;
 }
 
-#header-logo{
+#header-logo a{
     font-weight: bold;
     color:orange;
     float:left;
+    text-decoration: none;
 }
+
+/*https://www.soichiro.org/から拝借*/
 .buruburu {
     display: inline-block;
     animation: hurueru 6s infinite;
