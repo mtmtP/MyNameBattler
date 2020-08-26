@@ -12,3 +12,6 @@ N予備校　動くWEBページコンテスト2020夏　提出用ゲーム
   
 - [素数ゲーム](https://mtmtp.github.io/NumDivider/)
 - [新感覚タイピングゲーム](https://mtmtp.github.io/TypingSniper/) -PC専用
+  
+  
+イラスト：[いらすとや](https://www.irasutoya.com/)
